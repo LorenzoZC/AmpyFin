@@ -156,7 +156,7 @@ The dynamic ranking system allows **AmpyFin** to:
        - algorithm_holdings
        - points_tally
        - rank
-       - time_delta
+       - time_delta (make sure you also initialize a time_delta variable with a value of 0.01)
 
 4. **Run ranking_setup.py**
   - This initializes some tables in the db that we'll need later

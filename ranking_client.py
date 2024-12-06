@@ -371,9 +371,17 @@ def main():
    
    
    while True: 
+      ## update market status
+      client = RESTClient(api_key=POLYGON_API_KEY)
+      mongo_client = MongoClient(mongo_url)
+      market_db = mongo_client.market_data
+      market_collection = market_db.market_status
+      status = market_status(client)
+      market_collection.update_one({}, {"$set": {"market_status": status}})
+      
+      # retrieve market status
       mongo_client = MongoClient(mongo_url)
       status = mongo_client.market_data.market_status.find_one({})["market_status"]
-      
       
       if status == "open":  
         logging.info("Market is open. Processing strategies.")  
